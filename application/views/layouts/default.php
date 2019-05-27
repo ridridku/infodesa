@@ -76,7 +76,7 @@
                             <a href="<?php echo site_url('auth/login') ?>">Login</a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted small">Copyright &copy; Your Company 2016. All Rights Reserved</p>
+                    <p class="copyright text-muted small">Copyright &copy;Diskominfo 2019. All Rights Reserved</p>
                 </div>
             </div>
         </div>

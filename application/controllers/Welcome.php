@@ -28,7 +28,14 @@ class Welcome extends MY_Controller {
 	 */
 	public function index()
 	{
-		$this->template->build('welcome/welcome_message');
+            $this->template
+				->set_css('timeline')
+				->set_css('../bower_components/morrisjs/morris')
+				->set_js('../bower_components/raphael/raphael.min', TRUE)
+				->set_js('../bower_components/morrisjs/morris.min', TRUE)
+				->set_js('morris-data', TRUE)
+				->build('welcome/welcome_message');
+		//$this->template->build('welcome/welcome_message');
 	}
 
 }

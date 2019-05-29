@@ -1,4 +1,8 @@
 <!-- Header -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
 <a name="about"></a>
 <div class="intro-header">
 	<div class="container">
@@ -128,7 +132,7 @@
             
             <div class="panel panel-default">
 			<div class="panel-heading">
-				<i class="fa fa-bar-chart-o fa-fw"></i> STATISTIK APBDES DAN REALISASI TAHUN 2019
+				<i class="fa fa-bar-chart-o fa-fw"></i> STATISTIK PENDAPATAN APBDES DAN REALISASI TAHUN 2019
 				<div class="pull-right">
 					<div class="btn-group">
 						<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -160,7 +164,23 @@
 					</div>
 					<!-- /.col-lg-4 (nested) -->
 					<div class="col-lg-12">
-						<div id="morris-bar-chart"></div>
+						    <div id="graph"></div>
+
+    
+                    <script>
+                        Morris.Bar({
+                          element: 'graph',
+                            barGap:0.4,
+                              barSizeRatio:0.4,
+                                hideHover: 'auto',
+                          data: <?php echo $data;?>,
+                          xkey: 'desa',
+                          ykeys: ['anggaran', 'realisasi'],
+                          labels: ['anggran', 'realisasi']
+                        });
+                    </script>
+
+    
 					</div>
 					<!-- /.col-lg-8 (nested) -->
 				</div>
@@ -172,31 +192,20 @@
             
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Example
+				<i class="fa fa-bar-chart-o fa-fw"></i> STATISTIK PENDAPATAN  DESA
 				<div class="pull-right">
 					<div class="btn-group">
-						<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-							Actions
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu pull-right" role="menu">
-							<li><a href="#">Action</a>
-							</li>
-							<li><a href="#">Another action</a>
-							</li>
-							<li><a href="#">Something else here</a>
-							</li>
-							<li class="divider"></li>
-							<li><a href="#">Separated link</a>
-							</li>
-						</ul>
+						
+						
 					</div>
 				</div>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
-				<div id="morris-area-chart"></div>
-			</div>
+<!--				<div id="morris-area-chart"></div>-->
+ <div style="min-width: 310px; height: 5000px; max-width:2500px; margin: 0 auto" id="chart"></div>
+ 
+                        </div>
 			<!-- /.panel-body -->
 		</div>
 		<!-- /.panel -->
@@ -272,3 +281,41 @@
 
 </div>
 <!-- /.banner -->
+<script type="text/javascript">
+jQuery(function(){
+    
+  new Highcharts.Chart({
+        chart: {
+            renderTo: 'chart', //id di divnya --> <div id="chart">
+            type: 'bar', //jenis chart: spline or column or line or pie
+        },
+        title: {
+            text: 'Statistik Pendapatan',
+            x: -20 //posisi tulisan
+        },
+        subtitle: {
+            text: 'Perbandingan Pendapatan APBDES dan Realisasi Pendapatan',
+            x: -20 //posisi tulisan
+        },
+        yAxis: {
+           text: <?php echo json_encode($data_realisasi); ?>
+        },
+        xAxis: {
+        categories: <?php echo json_encode($data); ?>
+    },
+		 plotOptions: {
+        series: {
+            stacking: 'normal'
+        }
+    },
+
+series: [{
+        name: 'Anggaran',
+        data: <?php echo json_encode($data_kategori); ?>
+    }, {
+        name: 'Realisasi',
+        data: <?php echo json_encode($data_realisasi); ?>
+    }]
+    });
+}); 
+</script>

@@ -40,7 +40,7 @@ $config['template']['default_layout'] = 'default';
 |--------------------------------------------------------------------------
 |
 */
-$config['template']['base_title'] = 'infodesa Kab.Bandung';
+$config['template']['base_title'] = 'Dashboard Siskeudes Kab.Kulonprogo';
 
 /*
 |--------------------------------------------------------------------------

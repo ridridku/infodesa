@@ -11,22 +11,15 @@ $config['navigation'] = array(
 		'title' => 'Dashboard',
 		'icon' => 'fa fa-dashboard',
 	),
+   
 	'samples' => array(
-		'title' => 'Theme Pages',
+		'title' => 'LAPORAN',
 		'icon' => 'fa fa-paint-brush',
 		'children' => array(
 			'charts' => array(
-				'title' => 'Charts',
-				'children' => array(
-					'flot-charts' => array(
-						'uri' => 'samples/charts/flot',
-						'title' => 'Flot Charts'
-					),
-					'morris-charts' => array(
-						'uri' => 'samples/charts/morris',
-						'title' => 'Morris.js Charts'
-					)
-				)
+				'uri' => 'samples/charts/flot',
+                                'title' => 'Laporan'
+				
 			),
 			'tables' => array(
 				'uri' => 'samples/tables',
@@ -71,6 +64,26 @@ $config['navigation'] = array(
 			)
 		)
 	),
+    
+	'laporan' => array(
+		'title' => 'LAPORAN',
+		'icon' => 'fa fa-unlock-alt',
+		'children' => array(
+			'kompilasigab1' => array(
+				'uri' => 'acl/rule',
+				'title' => 'Rules'
+			),
+			'roles' => array(
+				'uri' => 'acl/role',
+				'title' => 'Roles'
+			),
+			'resources' => array(
+				'uri' => 'acl/resource',
+				'title' => 'Resources'
+			)
+		)
+	),
+    
 	'user-management' => array(
 		'uri' => 'auth/user',
 		'title' => 'User Management',
@@ -111,5 +124,6 @@ $config['navigation'] = array(
 				'title' => 'Info'
 			)
 		)
-	)
+	),
+    
 );

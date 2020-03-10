@@ -13,6 +13,8 @@ class User_model extends MY_Model {
 
 	protected $table = 'auth_users';
 	protected $role_table = 'acl_roles';
+	protected $kecamatan = 'master_kecamatan';
+	protected $desa = 'master_desa';
 	private $ci;
 
 	function __construct()
@@ -148,5 +150,21 @@ class User_model extends MY_Model {
 		$this->datatables->select('id, first_name, last_name, username, email, "" AS role, "" AS registered, "" AS action')
 				->from($this->table);
 		return $this->datatables->generate();
+	}
+        
+        function get_kecamatan(){
+            
+            
+          
+            
+		$this->db->select('*');
+		$this->db->from('master_kecamatan');
+		
+		$this->db->order_by('Nama_Kecamatan', 'ASC');
+		$data = $this->db->get()->result();
+                
+                
+                 // var_dump($$data) or die();
+                return $data;
 	}
 }

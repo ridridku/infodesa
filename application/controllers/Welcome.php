@@ -28,51 +28,77 @@ class Welcome extends MY_Controller {
 	 */
 	public function index()
 	{
-            $this->template
-				->set_css('timeline')
-				->set_css('../bower_components/morrisjs/morris')
-				->set_js('../bower_components/raphael/raphael.min', TRUE)
-				->set_js('../bower_components/morrisjs/morris.min', TRUE)
-				->set_js('morris-data', TRUE)
-				->build('welcome/welcome_message');
-	
-            
-                $this->load->model('pendapatan/M_pendapatan');
-                $data2 = $this->M_pendapatan->get_data()->result();
-              //  var_dump($data)or die();
-                $x['data'] = json_encode($data2);
-                $this->load->view('welcome/welcome_message',$x);
-      
-//            $this->load->model('pendapatan/M_pendapatan');
-////		$this->load->model('auth/user_model');
-//		$data['pendapatan'] = $this->inventaris_model->get_data()->result();
-//		$data['get_all_data'] = $this->inventaris_model->get_all_data();
-//		$data['get_day_data'] = $this->inventaris_model->get_day_data();
-//		$data['jumlah_user'] = $this->user_model->get_all_data();
+		$this->load->model('pendapatan/M_pendapatan');
+                $this->load->model('master/M_pendapatan');
+                     $this->load->model('auth/User_model');
+		$data['data'] = $this->M_pendapatan->get_data()->result();
+		$data['kec_'] = $this->user_model->get_kecamatan();
                 
               
-   
-        //  $this->load->view('welcome/welcome_message',$y);
-                
-              // $data[] = array();
+            // $x['jumlah_user'] = $this->M_pendapatan->get_all_data();
+
+		$data_desa=array();
 		$data_kategori = array();
-                $data_realisasi = array();
-                
-                foreach ($this->M_pendapatan->getChartData_Angkatan()->result_array() as $row){
-                    
-                   
-			$data[] = (string)$row['desa'];
-			$data_kategori[] = (int) $row['anggaran'];
-                        $data_realisasi[] = (int) $row['realisasi'];
-		}
+		$data_realisasi = array();
+                $data_kec=array();
                 
                 
-                $this->load->view('welcome/welcome_message', array(
-			'data'=>$data, 
-			'data_kategori'=>$data_kategori
-                        ,'data_realisasi'=>$data_realisasi)
-		);
-               //var_dump($data[])or die();
+                       
+                foreach ($this->M_pendapatan->getChartData_Angkatan()->result_array() as $row)
+                {
+
+                    $data_desa[] = (string)$row['desa'];
+                    $data_anggaran[] = (float) $row['anggaran'];
+                    $data_realisasi[] = (float) $row['realisasi'];
+
+
+                } 
+                
+                $belanja_desa=array();
+                $belanja_kategori = array();
+                $belanja_realisasi = array();
+                $kecamatan= array();
+
+            //$data['kecamatan'] = $this->user_model->get_kecamatan();
+
+                foreach ($this->M_pendapatan->get_chart_belanja()->result_array() as $row) 
+                {
+
+                    $belanja_desa[] = (string)$row['desa'];
+                    $belanja_anggaran[] = (float)$row['anggaran'];
+                    $belanja_realisasi[] = (float)$row['realisasi'];
+                                        
+                 }
+                 
+              foreach ($this->M_pendapatan->get_chart_belanja()->result_array() as $row) 
+                {
+                    $belanja_desa[] = (string)$row['desa'];
+                    $belanja_anggaran[] = (float)$row['anggaran'];
+                    $belanja_realisasi[] = (float)$row['realisasi'];                  
+                 }     
+                 
+                 
+                 
+                 
+                 
+                            $this->template
+                            ->set_css('../bower_components/morrisjs/morris')
+                            ->set_js('../bower_components/raphael/raphael.min', TRUE)
+                            ->set_js('../bower_components/morrisjs/morris.min', TRUE)
+                            ->build('welcome/welcome_message',array(
+                            'data'=>$data['data'],'data_kec'=> $data['kec_'], 
+                            'data_desa'=>$data_desa, 
+                            'data_anggaran'=>$data_anggaran,
+                            'data_realisasi'=>$data_realisasi,
+                            'belanja_desa'=>$belanja_desa, 
+                            'belanja_anggaran'=>$belanja_anggaran,
+                            'belanja_realisasi'=>$belanja_realisasi
+                                
+                                    ));
+	
+            
+                                   
+                                    //var_dump($data) or die();
 	}
 
 }

@@ -7,8 +7,9 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo site_url('/'); ?>"><?php echo $title ?></a>
+					
 				</div>
+				
 				<div class="collapse navbar-collapse">
 					<?php 
 					$menus = $this->config->item('main_nav');

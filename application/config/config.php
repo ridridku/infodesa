@@ -37,7 +37,6 @@ $config['base_url'] = 'http://localhost:5600/infodesa';
 |
 */
 $config['index_page'] = 'index.php';
-
 /*
 |--------------------------------------------------------------------------
 | URI PROTOCOL
